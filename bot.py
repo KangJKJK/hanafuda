@@ -25,6 +25,10 @@ else:
     RPC_URL = BASE_RPC_URL
     CONTRACT_ADDRESS = BASE_CONTRACT_ADDRESS
 
+# AMOUNT_ETH 정의
+AMOUNT_ETH = 0.0000000001  # 예치할 ETH 양
+amount_wei = web3.to_wei(AMOUNT_ETH, 'ether')  # 이 줄을 네트워크 선택 이후로 이동
+
 # Contract ABI
 CONTRACT_ABI = '''
 [
@@ -41,7 +45,6 @@ CONTRACT_ABI = '''
 
 # Web3 Connection
 web3 = Web3(Web3.HTTPProvider(RPC_URL))
-amount_wei = web3.to_wei(AMOUNT_ETH, 'ether')
 contract = web3.eth.contract(address=CONTRACT_ADDRESS, abi=json.loads(CONTRACT_ABI))
 
 # Load Private Keys
@@ -120,4 +123,3 @@ if __name__ == "__main__":
     start_time = time.time()
     send_transactions(num_transactions)
     display_footer(start_time)
-
