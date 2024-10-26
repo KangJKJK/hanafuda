@@ -6,9 +6,24 @@ from colorama import init, Fore, Style
 init(autoreset=True)
 
 # Constants
-RPC_URL = "https://mainnet.base.org"
-CONTRACT_ADDRESS = "0xC5bf05cD32a14BFfb705Fb37a9d218895187376c"
-AMOUNT_ETH = 0.0000000001  # 예치할 ETH 양
+BASE_RPC_URL = "https://mainnet.base.org"
+ARBITRUM_RPC_URL = "https://arb1.arbitrum.io/rpc"
+BASE_CONTRACT_ADDRESS = "0xC5bf05cD32a14BFfb705Fb37a9d218895187376c"  # Base 계약 주소
+ARBITRUM_CONTRACT_ADDRESS = "0xC5bf05cD32a14BFfb705Fb37a9d218895187376c"  # Arbitrum 계약 주소
+
+# 사용자에게 네트워크 선택 요청
+network_choice = input("어떤 네트워크를 사용하시겠습니까? (1: Base, 2: Arbitrum): ")
+
+if network_choice == "1":
+    RPC_URL = BASE_RPC_URL
+    CONTRACT_ADDRESS = BASE_CONTRACT_ADDRESS
+elif network_choice == "2":
+    RPC_URL = ARBITRUM_RPC_URL
+    CONTRACT_ADDRESS = ARBITRUM_CONTRACT_ADDRESS
+else:
+    print("잘못된 선택입니다. 기본값으로 Base 네트워크를 사용합니다.")
+    RPC_URL = BASE_RPC_URL
+    CONTRACT_ADDRESS = BASE_CONTRACT_ADDRESS
 
 # Contract ABI
 CONTRACT_ABI = '''
@@ -105,3 +120,4 @@ if __name__ == "__main__":
     start_time = time.time()
     send_transactions(num_transactions)
     display_footer(start_time)
+
